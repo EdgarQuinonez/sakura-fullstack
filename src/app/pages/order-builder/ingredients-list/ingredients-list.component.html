@@ -1,0 +1,8 @@
+<ul>
+    @for (item of ingredients; track $index) {
+        <li>
+            <span>{{ item.name }}</span>
+            <span>{{ item.price }}</span>            
+        </li>
+    }
+</ul>
