@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IngredientService } from '../../../providers/ingredient.service';
 import { Ingredient } from '../order-builder.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-ingredients-list',
@@ -11,10 +12,23 @@ import { Ingredient } from '../order-builder.model';
 })
 export class IngredientsListComponent {
 
-  ingredients!: Ingredient[];
+  ingredients: Ingredient[] = [];
 
-  constructor(private ingredientsService: IngredientService) {
-    this.ingredients = ingredientsService.getIngredients();
+  constructor(private ingredientsService: IngredientService) {    
   }
 
+  ngOnInit() {
+    this.ingredientsService.getIngredients().subscribe({
+      next: (ingredients: Ingredient[]) => {
+        this.ingredients = ingredients;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        console.log('Ingredients loaded');
+      }
+    });
+    
+  }
 }
