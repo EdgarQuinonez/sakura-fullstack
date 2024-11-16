@@ -1,15 +1,29 @@
-version: 'v2.29.7-desktop.1'
-
 services:
   django_gunicorn:
     volumes:
-      - static:static
+      - static:/static
     env_file:
       - .env
     build:
       context: .
     ports:
       - "8000:8000"
+  db:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - .env.prod.db
+  nginx:
+    build: ./nginx
+    volumes:
+      - static:/static
+    ports:
+      - "80:80"
+    depends_on:
+      - django_gunicorn
+    
 
 volumes:
   static:
+  postgres_data:

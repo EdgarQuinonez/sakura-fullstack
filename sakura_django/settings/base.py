@@ -69,10 +69,11 @@ WSGI_APPLICATION = 'sakura_django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'OPTIONS': {
-            'service': 'sakura_django',
-            'passfile': '.pgpass',            
-        },
+        'NAME': env('SQL_DATABASE_NAME'),
+        'USER': env('SQL_USER'),
+        'PASSWORD': env('SQL_PASSWORD'),
+        'HOST': env('SQL_HOST'),
+        'PORT': env('SQL_PORT'),        
     }
 }
 

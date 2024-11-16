@@ -1,6 +1,6 @@
 #!/bin/sh
 
-python manage.py migrate --noinput
-python manage.py collectstatic --noinput
+python manage.py migrate --no-input
+python manage.py collectstatic --no-input
 
-guincorn sakura_django.wsgi:application --bind 0.0.0.0:8000
+gunicorn sakura_django.wsgi:application --bind 0.0.0.0:8000
