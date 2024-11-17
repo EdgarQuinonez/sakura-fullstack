@@ -5,17 +5,23 @@ services:
     env_file:
       - .env
     build:
-      context: .
+      context: ./backend
     ports:
       - "8000:8000"
+    depends_on:
+      - db
+
   db:
     image: postgres:latest
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - .env.prod.db
+
   nginx:
-    build: ./nginx
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
     volumes:
       - static:/static
     ports:
