@@ -18,7 +18,9 @@ FROM nginx:latest
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Copy Angular build output from the previous stage
-COPY --from=build /usr/local/app/dist/sakura-angular /usr/share/nginx/html
+COPY --from=build /usr/local/app/dist/sakura-angular/browser /usr/share/nginx/html
 
 # Expose the default Nginx port
 EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
