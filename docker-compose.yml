@@ -8,7 +8,8 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
   web:
     build:
       context: .
@@ -25,6 +26,12 @@ services:
       - "5432:5432"
     env_file:
       - .env.prod.db
+    healthcheck:
+      #CHANGE 1: this command checks if the database is ready, right on the source db server
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     
 volumes:
   static:
