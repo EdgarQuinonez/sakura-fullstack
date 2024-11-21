@@ -5,14 +5,19 @@ import environ
 # Base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-print(BASE_DIR)
 # Initialize environment variables
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost",
+]
+
+
 # Application definition
 INSTALLED_APPS = [
+    "corsheaders",
     'rest_framework',
     'products',
     'django.contrib.admin',
@@ -24,6 +29,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
