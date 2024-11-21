@@ -1,17 +1,21 @@
+# settings/production.py
 from .base import *
 
-DEBUG = False
+
+# Load production-specific .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env.prod'))
+
+DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-# Database setup (customized in environment-specific settings files)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('SQL_DATABASE_NAME'),
-        'USER': env('SQL_USER'),
-        'PASSWORD': env('SQL_PASSWORD'),
-        'HOST': 'db',
-        'PORT': env('SQL_PORT'),        
+        'NAME': env('POSTGRES_DB'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_HOST'),
+        'PORT': env('POSTGRES_PORT'),
     }
 }

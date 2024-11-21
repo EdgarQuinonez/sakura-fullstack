@@ -3,7 +3,7 @@ services:
     volumes:
       - static:/static
     env_file:
-      - .env
+      - .env.prod
     build: ./backend
     ports:
       - "8000:8000"
@@ -19,6 +19,7 @@ services:
     depends_on:
       - django_gunicorn
   db:
+    restart: always
     image: postgres:latest
     volumes:
       - postgres_data:/var/lib/postgresql/data/

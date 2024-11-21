@@ -175,3 +175,5 @@ cython_debug/
 /tmp
 /out-tsc
 /bazel-out
+
+.env.prod
