@@ -70,7 +70,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-STATIC_ROOT = 'static/'
-STATIC_URL = 'static/'
+STATIC_ROOT = '/static/'
+STATIC_URL = os.path.join(BASE_DIR, '/static/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

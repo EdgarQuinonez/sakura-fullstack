@@ -1,0 +1,38 @@
+services:
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend/:/usr/local/app
+      - /usr/local/app/node_modules
+    ports:
+      - 4200:4200
+    depends_on:
+      - backend    
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend/:/usr/local/app
+    env_file:
+      - .env.dev    
+    ports:
+      - 8000:8000
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:17.2-alpine3.20
+    env_file:
+      - .env.dev.db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    healthcheck:      
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+    
+
+    

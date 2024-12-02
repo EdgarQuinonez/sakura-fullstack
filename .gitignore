@@ -176,4 +176,6 @@ cython_debug/
 /out-tsc
 /bazel-out
 
+.env.dev
 .env.prod
+.env.dev.db

@@ -1,17 +1,11 @@
 # settings/development.py
 from .base import *
 
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'), overwrite=True)
-env_file_path = os.path.join(BASE_DIR, '.env')
-if not os.path.exists(env_file_path):
-  raise ValueError(f"{env_file_path=} does not exists")
-
+environ.Env.read_env(os.path.join(BASE_DIR, '.env.dev'), overwrite=True)
 
 DEBUG = env.bool('DEBUG', default=True)
 SECRET_KEY = env('SECRET_KEY')
-
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
 
 DATABASES = {
     'default': {
