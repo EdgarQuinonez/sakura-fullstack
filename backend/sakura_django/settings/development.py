@@ -5,6 +5,11 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env.dev'), overwrite=True)
 
 DEBUG = env.bool('DEBUG', default=True)
 SECRET_KEY = env('SECRET_KEY')
+
+CORS_ALLOWED_ORIGINS = [    
+    "http://localhost:4200"
+]
+
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
 
 DATABASES = {

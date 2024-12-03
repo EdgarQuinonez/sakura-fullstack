@@ -9,9 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 # Initialize environment variables
 env = environ.Env()
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost",
-]
+
 
 
 # Application definition

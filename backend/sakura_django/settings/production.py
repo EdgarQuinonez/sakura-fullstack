@@ -6,7 +6,9 @@ from .base import *
 environ.Env.read_env(os.path.join(BASE_DIR, '.env.prod'))
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env.bool('DEBUG', default=False)
-
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost",    
+]
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
 
 DATABASES = {
