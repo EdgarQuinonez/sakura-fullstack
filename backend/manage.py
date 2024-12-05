@@ -6,8 +6,8 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    # TODO: Change for development env.
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sakura_django.settings.development')
+    # TODO: Change for development env.    
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sakura_django.settings.production')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
